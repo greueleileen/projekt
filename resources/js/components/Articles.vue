@@ -1,22 +1,22 @@
 <template>
     <div>
         <h2>Artikel</h2>
-        <form action="">
+        <form @submit.prevent="addArticle" class="mb-3">
             <h4>Füge einen neuen Artikel hinzu.</h4>
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="Titel" v-model="article.title">
             </div>
             <div class="form-group">
-                <textarea type="text" class="form-control" placeholder="Artikelbeschreibung" v-model="article.body"></textarea>
+                <textarea class="form-control" placeholder="Artikelbeschreibung" v-model="article.body"></textarea>
             </div>
-            <button type="submit" class="btn btn-light">Speichern</button>
+            <button type="submit" class="btn btn-light btn-block">Speichern</button>
         </form>
         <div class="card card-body mb-2" v-for="article in articles" v-bind:key="article.id">
             <h3>{{ article.title}}</h3>
             <p>{{ article.body}}</p>
             <hr>
-            <button class="btn btn-danger" @click="deleteArticle(article.id)">Artikel löschen</button>
-            <button class="btn btn-primary" @click="deleteArticle(article.id)">Artikel bearbeiten</button>
+            <button class="btn btn-danger mb-2" @click="deleteArticle(article.id)">Artikel löschen</button>
+            <button class="btn btn-primary" @click="editArticle(article)">Artikel bearbeiten</button>
         </div>
         <nav aria-label="...">
             <ul class="pagination">
@@ -72,10 +72,9 @@
                     next_page_url: links.next,
                     prev_page_url: links.prev
                 }
-
                 this.pagination = pagination;
             },
-            deleteArticle(id){
+            deleteArticle(id) {
                 if(confirm('Bist du dir sicher, das du diesen Artikel löschen möchtest?')){
                      fetch(`api/article/${id}` ,{
                          method: 'delete'
@@ -87,9 +86,53 @@
                          })
                          .catch(err => console.log(err));
                 }
+            },
+            addArticle() {
+                if(this.edit === false) {
+                    //Add new article
+                    fetch('api/article', {
+                        method: 'post',
+                        body: JSON.stringify(this.article),
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            this.article.title = '';
+                            this.article.body = '';
+                            alert('Artikel hinzugefügt');
+                            this.fetchArticles();
+                        })
+                        .catch(err => console.log(err));
+                } else {
+                    //Update article
+                    fetch('api/article', {
+                        method: 'put',
+                        body: JSON.stringify(this.article),
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            this.article.title = '';
+                            this.article.body = '';
+                            alert('Artikel geändert');
+                            this.fetchArticles();
+                        })
+                        .catch(err => console.log(err));
+                }
+            },
+            editArticle(article) {
+                this.edit = true;
+                this.article.id = article.id;
+                this.article.article_id = article.id;
+                this.article.title = article.title;
+                this.article.body = article.body;
             }
         }
-    }
+    };
 </script>
 
 <style scoped>
