@@ -18,7 +18,7 @@
             <button class="btn btn-danger mb-2" @click="deleteArticle(article.id)">Artikel löschen</button>
             <button class="btn btn-primary" @click="editArticle(article)">Artikel bearbeiten</button>
         </div>
-        <nav aria-label="...">
+        <nav aria-label="Pagination">
             <ul class="pagination">
                 <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                     <a class="page-link" href="#" tabindex="-1" @click="fetchArticles(pagination.prev_page_url)"><</a>
@@ -129,7 +129,7 @@
                 this.article.id = article.id;
                 this.article.article_id = article.id;
                 this.article.title = article.title;
-                this.article.body = article.body;
+                this.article.£body = article.body;
             }
         }
     };
