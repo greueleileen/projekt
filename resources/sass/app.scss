@@ -9,6 +9,83 @@
 @import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
-  background-color: #fff;
+  background-color: lighten($dark-petrol, 40%);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+//Background
+.bg-card-header {
+  background-color: $dark-petrol;
+  color: $white;
+  font-size: $font-size-header;
+}
+
+.bg-card-header2 {
+  background-color: lighten($dark-petrol, 40%);
+}
+
+.bg-card-header3 {
+  background-color: lighten($dark-petrol, 60%);
+}
+//Font
+.login_font {
+  font-size: $font-size-login;
+}
+
+.custom-color-link {
+  color: $light-petrol;
+  font-size: $font-size-link;
+}
+
+.article-font {
+  font-size: $font-size-link;
+}
+//Buttons
+.btn-custom-primary {
+  background-color: $light-petrol;
+  border: $light-petrol;
+  color: $white;
+  font-size: $font-size-link;
+}
+
+.btn-delete {
+  background-color: $dark-red;
+  border: $dark-red;
+  color: $white;
+  font-size: $font-size-link;
+}
+
+.btn-update {
+  background-color: $dark-petrol;
+  border: $dark-petrol;
+  color: $white;
+  font-size: $font-size-link;
+}
+
+.bg-page-btn {
+  background-color: $dark-petrol;
+  border: $dark-petrol;
+  color: $white;
+}
+//Border
+.form-border {
+  border: 2px solid lighten($dark-petrol, 40%);
+  border-radius: 0 0 5px 5px;
+}
+
+.card-border {
+  border: 2px solid lighten($dark-petrol, 60%);
+  border-radius: 5px;
+}
+//Paddings
+.padding-custom {
+  padding: 4rem;
+}
+
+.padding-form {
+  padding: 2rem 1rem;
+}
+
+.card-padding {
+  padding: 1rem;
+}
+
